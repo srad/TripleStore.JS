@@ -95,6 +95,10 @@ SimpleGraph.prototype.load = function (filename, callback) {
         that.add(triple[0], triple[1], triple[2]);
     });
 
+    readLine.on('error', function (err) {
+        console.log(err);
+    });
+
     readLine.on('close', callback);
 };
 
@@ -135,8 +139,8 @@ SimpleGraph.prototype.triples = function (sub, pred, obj) {
                 }
                 // sub undefined undefined
                 else {
-                    for (var retPred in this._osp[sub]) {
-                        for (var retObj in this._osp[sub][retPred]) {
+                    for (var retPred in this._spo[sub]) {
+                        for (var retObj in this._spo[sub][retPred]) {
                             result.push([sub, retPred, retObj]);
                         }
                     }
