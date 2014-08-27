@@ -1,55 +1,3 @@
-MIT LICENSE
-This JavaScript code is based on the Python implementation in the book "Programming The Semantic Web"
-by Toby Segaran, Colin Evans, Jamie Taylor, O'Reilly Press.
-
-Example:
-
-````javascript
-var SimpleGraph = require('./SimpleGraph').SimpleGraph;
-
-var placeGraph = new SimpleGraph();
-
-placeGraph.load('place_triples.txt', function () {
-    console.log('Information about San Francisco\n---------------------------------');
-    placeGraph.triples(undefined, 'name', 'San Francisco').forEach(function (triple) {
-        var nameId = triple[0];
-        console.log(nameId);
-
-        var cityData = placeGraph.triples(nameId, undefined, undefined);
-        console.log(cityData);
-    });
-
-    console.log('\nList of all mayors\n---------------------------------');
-    var mayors = placeGraph.triples(undefined, 'mayor', undefined);
-
-    mayors.forEach(function (triple) {
-        var mayor = triple[2],
-            cityId = triple[0],
-            city = placeGraph.value(cityId, 'name', undefined);
-
-        console.log(mayor, 'is the mayor of', city);
-    });
-
-    console.log('\nCities with their population\n---------------------------------');
-    var populations = placeGraph.triples(undefined, 'population', undefined);
-
-    populations
-        .sort(function (a, b) {
-            return b[2] - a[2];
-        })
-        .forEach(function (triple) {
-            var cityId = triple[0],
-                population = triple[2],
-                city = placeGraph.value(cityId, 'name', undefined);
-
-            console.log(city, 'has a population of', population);
-        });
-});
-````
-
-Yields to:
-
-````text
 Information about San Francisco
 ---------------------------------
 San_Francisco_California
@@ -137,4 +85,3 @@ Portsmouth has a population of 20784
 Half Moon Bay has a population of 11842
 Wasilla has a population of 9780
 Hillsdale has a population of 8233
-````

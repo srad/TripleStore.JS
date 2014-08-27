@@ -3,6 +3,7 @@ var SimpleGraph = require('./SimpleGraph').SimpleGraph;
 var placeGraph = new SimpleGraph();
 
 placeGraph.load('place_triples.txt', function () {
+    console.log('Information about San Francisco\n---------------------------------');
     placeGraph.triples(undefined, 'name', 'San Francisco').forEach(function (triple) {
         var nameId = triple[0];
         console.log(nameId);
@@ -11,6 +12,7 @@ placeGraph.load('place_triples.txt', function () {
         console.log(cityData);
     });
 
+    console.log('\nList of all mayors\n---------------------------------');
     var mayors = placeGraph.triples(undefined, 'mayor', undefined);
 
     mayors.forEach(function (triple) {
@@ -21,7 +23,7 @@ placeGraph.load('place_triples.txt', function () {
         console.log(mayor, 'is the mayor of', city);
     });
 
-    console.log('\nCities with their population\n---------------------------------')
+    console.log('\nCities with their population\n---------------------------------');
     var populations = placeGraph.triples(undefined, 'population', undefined);
 
     populations
